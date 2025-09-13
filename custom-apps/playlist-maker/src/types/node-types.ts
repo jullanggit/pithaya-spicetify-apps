@@ -27,7 +27,8 @@ type FilterNodeType =
     | 'mode'
     | 'releaseDate'
     | 'duration'
-    | 'isExplicit';
+    | 'isExplicit'
+    | 'isSaved';
 
 type ProcessingNodeType =
     | 'deduplicate'

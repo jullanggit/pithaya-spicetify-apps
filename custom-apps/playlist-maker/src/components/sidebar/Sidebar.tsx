@@ -194,6 +194,11 @@ export function Sidenav(): JSX.Element {
                             tooltip="Filter tracks that are explicit."
                         />
                         <SidenavItem
+                            label="Is saved"
+                            nodeType="isSaved"
+                            tooltip="Filter tracks that are saved in your liked songs."
+                        />
+                        <SidenavItem
                             label="Duration"
                             nodeType="duration"
                             tooltip="Filter tracks by duration."

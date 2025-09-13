@@ -31,12 +31,13 @@ import { LocalTracksSourceNode } from '../../components/nodes/sources/LocalTrack
 import { RadioAlbumSourceNode } from '../../components/nodes/sources/RadioAlbumSourceNode';
 import { RadioArtistSourceNode } from '../../components/nodes/sources/RadioArtistSourceNode';
 import { RadioTrackSourceNode } from '../../components/nodes/sources/RadioTrackSourceNode';
+import { RecommendedPlaylistTracksSourceNode } from '../../components/nodes/sources/RecommendedPlaylistTracksSourceNode';
 import { SearchAlbumSourceNode } from '../../components/nodes/sources/SearchAlbumSourceNode';
 import { SearchArtistSourceNode } from '../../components/nodes/sources/SearchArtistSourceNode';
 import { SearchPlaylistSourceNode } from '../../components/nodes/sources/SearchPlaylistSourceNode';
 import { TopTracksSourceNode } from '../../components/nodes/sources/TopTracksSourceNode';
 import { type CustomNodeType } from '../../types/node-types';
-import { RecommendedPlaylistTracksSourceNode } from '../../components/nodes/sources/RecommendedPlaylistTracksSourceNode';
+import { IsSavedNode } from '../../components/nodes/filter/IsSavedNode';
 
 /**
  * Mapping used to instantiate node components based on their type.
@@ -81,4 +82,5 @@ export const nodeTypeToComponentMapping: Record<
     subset: SubsetNode,
     isExplicit: IsExplicitNode,
     recommendedPlaylistTracksSource: RecommendedPlaylistTracksSourceNode,
+    isSaved: IsSavedNode,
 };

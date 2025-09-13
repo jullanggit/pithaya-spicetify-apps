@@ -7,6 +7,7 @@ import { DEFAULT_ENERGY_DATA } from '../processors/filter/energy-processor';
 import { DEFAULT_INSTRUMENTALNESS_DATA } from '../processors/filter/instrumentalness-processor';
 import { DEFAULT_IS_EXPLICIT_DATA } from '../processors/filter/is-explicit-processor';
 import { DEFAULT_IS_PLAYABLE_DATA } from '../processors/filter/is-playable-processor';
+import { DEFAULT_IS_SAVED_DATA } from '../processors/filter/is-saved-processor';
 import { DEFAULT_LIVENESS_DATA } from '../processors/filter/liveness-processor';
 import { DEFAULT_LOUDNESS_DATA } from '../processors/filter/loudness-processor';
 import { DEFAULT_MODE_DATA } from '../processors/filter/mode-processor';
@@ -69,4 +70,5 @@ export const nodeDefaultValuesFactory: Record<
     recommendedPlaylistTracksSource: () => ({
         ...DEFAULT_RECOMMENDED_PLAYLIST_TRACKS_DATA,
     }),
+    isSaved: () => ({ ...DEFAULT_IS_SAVED_DATA }),
 };

@@ -31,6 +31,10 @@ import {
     IsPlayableProcessor,
 } from '../processors/filter/is-playable-processor';
 import {
+    IsSavedProcessor,
+    type IsSavedData,
+} from '../processors/filter/is-saved-processor';
+import {
     type LivenessData,
     LivenessProcessor,
 } from '../processors/filter/liveness-processor';
@@ -307,6 +311,12 @@ export const nodeProcessorFactory: Record<
         incomers,
     ) =>
         new RecommendedPlaylistTracksSourceProcessor(
+            node.id,
+            { source: incomers.map((node) => node.id) },
+            node.data,
+        ),
+    isSaved: (node: Node<IsSavedData>, incomers) =>
+        new IsSavedProcessor(
             node.id,
             { source: incomers.map((node) => node.id) },
             node.data,
