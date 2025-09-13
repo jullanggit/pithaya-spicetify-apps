@@ -21,7 +21,7 @@ export function Select<T extends string>(
 ): JSX.Element {
     return (
         <select
-            className="main-dropDown-dropDown bg-spice-tab-active"
+            className="h-8 w-full rounded-sm bg-(--spice-tab-active) px-3 pe-5 hover:cursor-pointer hover:text-(--text-base)"
             name={props.name}
             disabled={props.disabled}
             value={props.selectedValue}
