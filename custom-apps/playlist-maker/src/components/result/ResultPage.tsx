@@ -118,7 +118,7 @@ export function ResultPage(): JSX.Element {
                                         ],
                                         result.length.toFixed(),
                                     )}
-                                    <span className="main-entityHeader-divider"></span>
+                                    <span className="mx-1">•</span>
                                     {getTranslatedDuration(
                                         result.reduce(
                                             (acc, track) =>
