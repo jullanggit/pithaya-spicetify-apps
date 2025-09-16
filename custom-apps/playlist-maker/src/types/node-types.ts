@@ -36,7 +36,7 @@ type ProcessingNodeType =
     | 'sort'
     | 'intersection'
     | 'difference'
-    | 'relativeComplement'
+    | 'substract'
     | 'subset';
 
 // Note: keeping 'result' for 'addToResult' for backward compatibility of saved workflows

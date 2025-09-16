@@ -7,6 +7,7 @@ import { EnergyNode } from '../../components/nodes/filter/EnergyNode';
 import { InstrumentalnessNode } from '../../components/nodes/filter/InstrumentalnessNode';
 import { IsExplicitNode } from '../../components/nodes/filter/IsExplicitNode';
 import { IsPlayableNode } from '../../components/nodes/filter/IsPlayableNode';
+import { IsSavedNode } from '../../components/nodes/filter/IsSavedNode';
 import { LivenessNode } from '../../components/nodes/filter/LivenessNode';
 import { LoudnessNode } from '../../components/nodes/filter/LoudnessNode';
 import { ModeNode } from '../../components/nodes/filter/ModeNode';
@@ -17,10 +18,10 @@ import { ValenceNode } from '../../components/nodes/filter/ValenceNode';
 import { DeduplicateNode } from '../../components/nodes/processing/DeduplicateNode';
 import { DifferenceNode } from '../../components/nodes/processing/DifferenceNode';
 import { IntersectionNode } from '../../components/nodes/processing/IntersectionNode';
-import { RelativeComplementNode } from '../../components/nodes/processing/RelativeComplementNode';
 import { ShuffleNode } from '../../components/nodes/processing/ShuffleNode';
 import { SortProcessorNode } from '../../components/nodes/processing/SortProcessorNode';
 import { SubsetNode } from '../../components/nodes/processing/SubsetNode';
+import { SubstractNode } from '../../components/nodes/processing/SubstractNode';
 import { AddToPlaylistNode } from '../../components/nodes/result/AddToPlaylistNode';
 import { AddToResultNode } from '../../components/nodes/result/AddToResultNode';
 import { LibraryAlbumSourceNode } from '../../components/nodes/sources/LibraryAlbumSourceNode';
@@ -37,7 +38,6 @@ import { SearchArtistSourceNode } from '../../components/nodes/sources/SearchArt
 import { SearchPlaylistSourceNode } from '../../components/nodes/sources/SearchPlaylistSourceNode';
 import { TopTracksSourceNode } from '../../components/nodes/sources/TopTracksSourceNode';
 import { type CustomNodeType } from '../../types/node-types';
-import { IsSavedNode } from '../../components/nodes/filter/IsSavedNode';
 
 /**
  * Mapping used to instantiate node components based on their type.
@@ -77,7 +77,7 @@ export const nodeTypeToComponentMapping: Record<
     duration: DurationNode,
     intersection: IntersectionNode,
     difference: DifferenceNode,
-    relativeComplement: RelativeComplementNode,
+    substract: SubstractNode,
     addToPlaylist: AddToPlaylistNode,
     subset: SubsetNode,
     isExplicit: IsExplicitNode,

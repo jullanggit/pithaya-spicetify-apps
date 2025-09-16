@@ -6,7 +6,7 @@ import { NodeContent } from '../shared/NodeContent';
 import { ProcessingNodeHeader } from '../shared/NodeHeader';
 import { NodeTitle } from '../shared/NodeTitle';
 
-export function RelativeComplementNode(
+export function SubstractNode(
     props: Readonly<NodeProps<BaseNodeData>>,
 ): JSX.Element {
     return (
@@ -14,8 +14,8 @@ export function RelativeComplementNode(
             <ProcessingNodeHeader />
             <NodeContent>
                 <NodeTitle
-                    title="Relative complement"
-                    tooltip="Keep only the tracks that are in the first input and not in the second."
+                    title="Substract"
+                    tooltip="Remove tracks that are in the second input from the first input."
                 />
                 <p>First input</p>
                 <p>Second input</p>

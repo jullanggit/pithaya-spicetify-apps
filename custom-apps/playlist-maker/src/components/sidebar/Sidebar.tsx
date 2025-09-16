@@ -302,9 +302,9 @@ export function Sidenav(): JSX.Element {
                         tooltip="Keep only the tracks that are not in both inputs."
                     />
                     <SidenavItem
-                        label="Relative complement"
-                        nodeType="relativeComplement"
-                        tooltip="Keep only the tracks that are in the first input and not in the second."
+                        label="Substract"
+                        nodeType="substract"
+                        tooltip="Remove tracks that are in the second input from the first input."
                     />
                     <SidenavItem
                         label="Subset"

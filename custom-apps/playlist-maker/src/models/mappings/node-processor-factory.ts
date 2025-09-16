@@ -31,8 +31,8 @@ import {
     IsPlayableProcessor,
 } from '../processors/filter/is-playable-processor';
 import {
-    IsSavedProcessor,
     type IsSavedData,
+    IsSavedProcessor,
 } from '../processors/filter/is-saved-processor';
 import {
     type LivenessData,
@@ -66,7 +66,6 @@ import type { NodeProcessor } from '../processors/node-processor';
 import { DeduplicateProcessor } from '../processors/processing/deduplicate-processor';
 import { DifferenceProcessor } from '../processors/processing/difference-processor';
 import { IntersectionProcessor } from '../processors/processing/intersection-processor';
-import { RelativeComplementProcessor } from '../processors/processing/relative-complement-processor';
 import { ShuffleProcessor } from '../processors/processing/shuffle-processor';
 import {
     type OrderByData,
@@ -76,6 +75,7 @@ import {
     type SubsetData,
     SubsetProcessor,
 } from '../processors/processing/subset-processor';
+import { SubstractProcessor } from '../processors/processing/substract-processor';
 import {
     type AlbumData,
     AlbumSourceProcessor,
@@ -275,8 +275,8 @@ export const nodeProcessorFactory: Record<
             },
             node.data,
         ),
-    relativeComplement: (node: Node<BaseNodeData>, incomers, edges) =>
-        new RelativeComplementProcessor(
+    substract: (node: Node<BaseNodeData>, incomers, edges) =>
+        new SubstractProcessor(
             node.id,
             {
                 'first-set': getIncomingNodeIdsForHandle(

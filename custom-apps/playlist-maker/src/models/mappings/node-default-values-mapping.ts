@@ -63,7 +63,7 @@ export const nodeDefaultValuesFactory: Record<
     duration: () => ({ ...DEFAULT_DURATION_DATA }),
     intersection: () => ({ ...DEFAULT_BASE_NODE_DATA }),
     difference: () => ({ ...DEFAULT_BASE_NODE_DATA }),
-    relativeComplement: () => ({ ...DEFAULT_BASE_NODE_DATA }),
+    substract: () => ({ ...DEFAULT_BASE_NODE_DATA }),
     addToPlaylist: () => ({ ...DEFAULT_ADD_TO_PLAYLIST_DATA }),
     subset: () => ({ ...DEFAULT_SUBSET_DATA }),
     isExplicit: () => ({ ...DEFAULT_IS_EXPLICIT_DATA }),
