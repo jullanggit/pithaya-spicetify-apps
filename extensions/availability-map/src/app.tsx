@@ -1,12 +1,10 @@
 import { getTrack } from '@shared/api/endpoints/tracks/get-track';
 import { waitForSpicetify } from '@shared/utils/spicetify-utils';
-import { registerLocale } from 'i18n-iso-countries';
-import * as enLocale from 'i18n-iso-countries/langs/en.json';
-import * as frLocale from 'i18n-iso-countries/langs/fr.json';
 import i18next from 'i18next';
 import { EarthLock } from 'lucide-react';
 import React from 'react';
 import { WorldMap } from './components/WorldMap/WorldMap';
+import { getIsoCountriesLocale, registerMapLocale } from './utils/i18n-utils';
 
 async function showAvailability(uris: string[], locale: string): Promise<void> {
     const track = await getTrack({ uri: uris[0], withoutMarket: true });
@@ -14,7 +12,10 @@ async function showAvailability(uris: string[], locale: string): Promise<void> {
     Spicetify.PopupModal.display({
         title: i18next.t('modalTitle'),
         content: (
-            <WorldMap trackMarkets={track.available_markets} locale={locale} />
+            <WorldMap
+                trackMarkets={track.available_markets ?? []}
+                locale={locale}
+            />
         ),
         isLarge: true,
     });
@@ -27,10 +28,10 @@ function isSingleTrack(uris: string[]): boolean {
 async function main(): Promise<void> {
     await waitForSpicetify();
 
-    const locale: typeof Spicetify.Locale = Spicetify.Locale;
+    const locale: string = Spicetify.Locale.getLocale();
 
     await i18next.init({
-        lng: locale.getLocale(),
+        lng: locale,
         fallbackLng: 'en',
         debug: false,
         resources: {
@@ -49,13 +50,13 @@ async function main(): Promise<void> {
         },
     });
 
-    registerLocale(enLocale);
-    registerLocale(frLocale);
+    const isoCountriesLocale = getIsoCountriesLocale(locale);
+    registerMapLocale(isoCountriesLocale);
 
     const menuItem = new Spicetify.ContextMenu.Item(
         i18next.t('showAvailability'),
         (uris) => {
-            void showAvailability(uris, locale.getLocale());
+            void showAvailability(uris, isoCountriesLocale);
         },
         isSingleTrack,
         Spicetify.ReactDOMServer.renderToString(

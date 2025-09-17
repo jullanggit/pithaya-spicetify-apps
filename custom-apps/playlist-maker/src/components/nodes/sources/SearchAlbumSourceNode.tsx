@@ -1,4 +1,3 @@
-import { TextComponent } from '@shared/components/ui/TextComponent/TextComponent';
 import { getAlbum as getGraphQlAlbum } from '@shared/graphQL/queries/get-album';
 import { searchDesktop } from '@shared/graphQL/queries/search-desktop';
 import {
@@ -10,7 +9,7 @@ import { useNodeForm } from 'custom-apps/playlist-maker/src/hooks/use-node-form'
 import {
     type AlbumData,
     AlbumDataSchema,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/album-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/album-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import { Music } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
@@ -193,6 +192,7 @@ export function SearchAlbumSourceNode(
         selectedItem,
         syncInputWithSelectedItem,
         onSelectedIdChanged,
+        fetchLoading,
     } = useComboboxValues<AlbumItem>(
         getAlbum,
         getAlbums,
@@ -230,15 +230,9 @@ export function SearchAlbumSourceNode(
                         onInputChanged={onInputChanged}
                         onClear={resetSelection}
                         onBlur={syncInputWithSelectedItem}
+                        loading={fetchLoading}
                     />
                 </NodeComboField>
-                <TextComponent
-                    elementType="p"
-                    fontSize="small"
-                    semanticColor="textSubdued"
-                >
-                    Selected: {props.data.uri === '' ? '-' : props.data.uri}
-                </TextComponent>
 
                 <NodeField
                     label="Offset"

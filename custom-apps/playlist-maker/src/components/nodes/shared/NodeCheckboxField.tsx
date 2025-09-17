@@ -14,6 +14,8 @@ export function NodeCheckboxField(props: Readonly<Props>): JSX.Element {
             label={props.label}
             error={props.error}
             tooltip={props.tooltip}
+            small={true}
+            centerFields={true}
         >
             <div className="flex justify-end">{props.children}</div>
         </NodeField>

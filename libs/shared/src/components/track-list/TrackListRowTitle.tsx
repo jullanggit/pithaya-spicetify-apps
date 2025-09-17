@@ -19,6 +19,7 @@ export function TrackListRowTitle(props: Readonly<Props>): JSX.Element {
                 className="main-trackList-rowTitle standalone-ellipsis-one-line"
                 variant="ballad"
                 semanticColor="textBase"
+                style={{ gridArea: 'title' }}
             >
                 {props.track.name}
             </TextComponent>
@@ -27,6 +28,7 @@ export function TrackListRowTitle(props: Readonly<Props>): JSX.Element {
                     className="main-trackList-rowSubTitle standalone-ellipsis-one-line"
                     variant="mesto"
                     semanticColor="textSubdued"
+                    style={{ gridArea: 'subtitle' }}
                 >
                     {props.track.artists
                         .map((a) => (

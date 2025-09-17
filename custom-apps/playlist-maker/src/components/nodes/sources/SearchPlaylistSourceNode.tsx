@@ -1,5 +1,4 @@
 import type { Item } from '@shared/components/inputs/Select/Select';
-import { TextComponent } from '@shared/components/ui/TextComponent/TextComponent';
 import { searchDesktop } from '@shared/graphQL/queries/search-desktop';
 import { getPlatform } from '@shared/utils/spicetify-utils';
 import { useComboboxValues } from 'custom-apps/playlist-maker/src/hooks/use-combobox-values';
@@ -7,7 +6,7 @@ import { useNodeForm } from 'custom-apps/playlist-maker/src/hooks/use-node-form'
 import {
     PlaylistDataSchema,
     type PlaylistData,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/playlist-tracks-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/playlist-tracks-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import { Music } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
@@ -176,6 +175,7 @@ export function SearchPlaylistSourceNode(
         selectedItem,
         syncInputWithSelectedItem,
         onSelectedIdChanged,
+        fetchLoading,
     } = useComboboxValues<PlaylistItem>(
         getPlaylist,
         getPlaylists,
@@ -214,18 +214,9 @@ export function SearchPlaylistSourceNode(
                         onInputChanged={onInputChanged}
                         onClear={resetSelection}
                         onBlur={syncInputWithSelectedItem}
+                        loading={fetchLoading}
                     />
                 </NodeComboField>
-                <TextComponent
-                    elementType="p"
-                    fontSize="small"
-                    semanticColor="textSubdued"
-                >
-                    Selected:{' '}
-                    {props.data.playlistUri === ''
-                        ? '-'
-                        : props.data.playlistUri}
-                </TextComponent>
 
                 <NodeField
                     tooltip="Search filter to apply"

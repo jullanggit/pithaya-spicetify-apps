@@ -5,33 +5,14 @@ import React, {
     type KeyboardEvent,
     type PropsWithChildren,
 } from 'react';
-import { type CustomNodeType } from '../../models/nodes/node-types';
 import { useAppStore } from '../../stores/store';
+import { type CustomNodeType } from '../../types/node-types';
 
 type SidenavItemProps = {
     nodeType: CustomNodeType;
     label: string;
     tooltip: string;
 };
-
-function PlaceholderSidenavItem(
-    props: Readonly<{ label: string }>,
-): JSX.Element {
-    return (
-        <li>
-            <Spicetify.ReactComponent.TooltipWrapper
-                label="Coming soon"
-                showDelay={100}
-            >
-                <li className="w-full cursor-not-allowed border-none bg-transparent !py-1 text-start opacity-50">
-                    <TextComponent elementType="span" fontSize="medium">
-                        {props.label}
-                    </TextComponent>
-                </li>
-            </Spicetify.ReactComponent.TooltipWrapper>
-        </li>
-    );
-}
 
 function SidenavItem(props: Readonly<SidenavItemProps>): JSX.Element {
     const addNode = useAppStore((state) => state.addNode);
@@ -185,6 +166,16 @@ export function Sidenav(): JSX.Element {
                         />
                     </ul>
                 </SidenavCollapsible>
+
+                <SidenavCollapsible label="Playlist">
+                    <ul>
+                        <SidenavItem
+                            label="Recommended tracks"
+                            nodeType="recommendedPlaylistTracksSource"
+                            tooltip="Get recommended tracks for a playlist."
+                        />
+                    </ul>
+                </SidenavCollapsible>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -196,6 +187,16 @@ export function Sidenav(): JSX.Element {
                             label="Is playable"
                             nodeType="isPlayable"
                             tooltip="Filter tracks that are playable."
+                        />
+                        <SidenavItem
+                            label="Is explicit"
+                            nodeType="isExplicit"
+                            tooltip="Filter tracks that are explicit."
+                        />
+                        <SidenavItem
+                            label="Is saved"
+                            nodeType="isSaved"
+                            tooltip="Filter tracks that are saved in your liked songs."
                         />
                         <SidenavItem
                             label="Duration"
@@ -301,9 +302,14 @@ export function Sidenav(): JSX.Element {
                         tooltip="Keep only the tracks that are not in both inputs."
                     />
                     <SidenavItem
-                        label="Relative complement"
-                        nodeType="relativeComplement"
-                        tooltip="Keep only the tracks that are in the first input and not in the second."
+                        label="Substract"
+                        nodeType="substract"
+                        tooltip="Remove tracks that are in the second input from the first input."
+                    />
+                    <SidenavItem
+                        label="Subset"
+                        nodeType="subset"
+                        tooltip="Keep only the specified number of tracks."
                     />
                 </ul>
             </div>
@@ -313,9 +319,14 @@ export function Sidenav(): JSX.Element {
 
                 <ul>
                     <SidenavItem
-                        label="Result"
+                        label="Add to result tab"
                         nodeType="result"
-                        tooltip="The workflow result."
+                        tooltip="Output the result in the result tab."
+                    />
+                    <SidenavItem
+                        label="Add to playlist"
+                        nodeType="addToPlaylist"
+                        tooltip="Output the result to an existing playlist."
                     />
                 </ul>
             </div>

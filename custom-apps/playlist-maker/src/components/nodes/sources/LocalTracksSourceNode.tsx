@@ -3,7 +3,7 @@ import { useNodeForm } from 'custom-apps/playlist-maker/src/hooks/use-node-form'
 import {
     LocalTracksDataSchema,
     type LocalTracksData,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/local-tracks-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/local-tracks-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import React from 'react';
 import { Handle, Position, type NodeProps } from 'reactflow';
@@ -67,7 +67,7 @@ export function LocalTracksSourceNode(
         <Node isExecuting={props.data.isExecuting} isSelected={props.selected}>
             <SourceNodeHeader />
             <NodeContent>
-                <NodeTitle title="Local tracks" />
+                <NodeTitle title="Local files" />
 
                 <NodeField
                     tooltip="Search filter to apply"

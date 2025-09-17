@@ -1,5 +1,4 @@
 import { type Item } from '@shared/components/inputs/Select/Select';
-import { TextComponent } from '@shared/components/ui/TextComponent/TextComponent';
 import { queryArtistOverview } from '@shared/graphQL/queries/query-artist-overview';
 import { searchDesktop } from '@shared/graphQL/queries/search-desktop';
 import { useComboboxValues } from 'custom-apps/playlist-maker/src/hooks/use-combobox-values';
@@ -8,7 +7,7 @@ import {
     type ArtistData,
     ArtistDataSchema,
     type ArtistTrackType,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/artist-tracks-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/artist-tracks-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import { Music } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
@@ -176,6 +175,7 @@ export function SearchArtistSourceNode(
         selectedItem,
         syncInputWithSelectedItem,
         onSelectedIdChanged,
+        fetchLoading,
     } = useComboboxValues<ArtistItem>(
         getArtist,
         getArtists,
@@ -213,15 +213,9 @@ export function SearchArtistSourceNode(
                         onInputChanged={onInputChanged}
                         onClear={resetSelection}
                         onBlur={syncInputWithSelectedItem}
+                        loading={fetchLoading}
                     />
                 </NodeComboField>
-                <TextComponent
-                    elementType="p"
-                    fontSize="small"
-                    semanticColor="textSubdued"
-                >
-                    Selected: {props.data.uri === '' ? '-' : props.data.uri}
-                </TextComponent>
 
                 <NodeField
                     label="Type of tracks"

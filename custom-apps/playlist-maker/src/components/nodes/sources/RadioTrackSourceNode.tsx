@@ -1,13 +1,12 @@
 import { getTrack as getApiTrack } from '@shared/api/endpoints/tracks/get-track';
 import type { Item } from '@shared/components/inputs/Select/Select';
-import { TextComponent } from '@shared/components/ui/TextComponent/TextComponent';
 import { searchDesktop } from '@shared/graphQL/queries/search-desktop';
 import { useComboboxValues } from 'custom-apps/playlist-maker/src/hooks/use-combobox-values';
 import { useNodeForm } from 'custom-apps/playlist-maker/src/hooks/use-node-form';
 import {
     type RadioData,
     RadioDataSchema,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/radio-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/radio-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import { Music } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
@@ -112,25 +111,24 @@ export function RadioTrackSourceNode(
                 numberOfTopResults: 5,
             });
 
-            const items: TrackItem[] = search.searchV2.tracksV2.items.map(
-                (track) => {
+            const items: TrackItem[] = search.searchV2.tracksV2.items
+                .map((trackItem) => trackItem.item.data)
+                .filter((item) => item.__typename === 'Track')
+                .map((track) => {
                     return {
-                        id: track.item.data.uri,
-                        uri: track.item.data.uri,
-                        name: track.item.data.name,
+                        id: track.uri,
+                        uri: track.uri,
+                        name: track.name,
                         image:
-                            track.item.data.albumOfTrack.coverArt.sources
-                                .length > 0
-                                ? track.item.data.albumOfTrack.coverArt
-                                      .sources[0].url
+                            track.albumOfTrack.coverArt.sources.length > 0
+                                ? track.albumOfTrack.coverArt.sources[0].url
                                 : null,
-                        artists: track.item.data.artists.items
+                        artists: track.artists.items
                             .map((artist) => artist.profile.name)
                             .join(', '),
-                        album: track.item.data.albumOfTrack.name,
+                        album: track.albumOfTrack.name,
                     };
-                },
-            );
+                });
 
             return items;
         },
@@ -183,6 +181,7 @@ export function RadioTrackSourceNode(
         selectedItem,
         syncInputWithSelectedItem,
         onSelectedIdChanged,
+        fetchLoading,
     } = useComboboxValues<TrackItem>(
         getTrack,
         getTracks,
@@ -220,15 +219,9 @@ export function RadioTrackSourceNode(
                         onInputChanged={onInputChanged}
                         onClear={resetSelection}
                         onBlur={syncInputWithSelectedItem}
+                        loading={fetchLoading}
                     />
                 </NodeComboField>
-                <TextComponent
-                    elementType="p"
-                    fontSize="small"
-                    semanticColor="textSubdued"
-                >
-                    Selected: {props.data.uri === '' ? '-' : props.data.uri}
-                </TextComponent>
 
                 <NodeField
                     label="Offset"

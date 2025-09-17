@@ -1,4 +1,3 @@
-import { TextComponent } from '@shared/components/ui/TextComponent/TextComponent';
 import { getAlbum as getGraphQlAlbum } from '@shared/graphQL/queries/get-album';
 import {
     type GetContentsAlbumItem,
@@ -11,7 +10,7 @@ import { useNodeForm } from 'custom-apps/playlist-maker/src/hooks/use-node-form'
 import {
     type AlbumData,
     AlbumDataSchema,
-} from 'custom-apps/playlist-maker/src/models/nodes/sources/album-source-processor';
+} from 'custom-apps/playlist-maker/src/models/processors/sources/album-source-processor';
 import { getDefaultValueForNodeType } from 'custom-apps/playlist-maker/src/utils/node-utils';
 import { Music } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
@@ -167,6 +166,7 @@ export function LibraryAlbumSourceNode(
         selectedItem,
         syncInputWithSelectedItem,
         onSelectedIdChanged,
+        fetchLoading,
     } = useComboboxValues<AlbumItem>(
         getAlbum,
         getAlbums,
@@ -184,7 +184,7 @@ export function LibraryAlbumSourceNode(
         <Node isExecuting={props.data.isExecuting} isSelected={props.selected}>
             <SourceNodeHeader />
             <NodeContent>
-                <NodeTitle title="Album" />
+                <NodeTitle title="Saved album" />
 
                 <NodeComboField error={errors.uri}>
                     <ComboBoxController
@@ -201,15 +201,9 @@ export function LibraryAlbumSourceNode(
                         onInputChanged={onInputChanged}
                         onClear={resetSelection}
                         onBlur={syncInputWithSelectedItem}
+                        loading={fetchLoading}
                     />
                 </NodeComboField>
-                <TextComponent
-                    elementType="p"
-                    fontSize="small"
-                    semanticColor="textSubdued"
-                >
-                    Selected: {props.data.uri === '' ? '-' : props.data.uri}
-                </TextComponent>
 
                 <NodeField
                     label="Offset"

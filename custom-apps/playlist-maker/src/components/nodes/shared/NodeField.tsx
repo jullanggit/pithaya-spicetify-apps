@@ -8,11 +8,18 @@ export type Props = PropsWithChildren<{
     label: string;
     tooltip?: string;
     error: FieldError | undefined;
+    small?: boolean;
+    centerFields?: boolean;
 }>;
 
 export function NodeField(props: Readonly<Props>): JSX.Element {
     return (
-        <label className="flex flex-row items-start justify-between gap-5">
+        <label
+            className={Spicetify.classnames(
+                'flex flex-row justify-between gap-5',
+                (props.centerFields ?? false) ? 'items-center' : 'items-start',
+            )}
+        >
             <div className="flex items-center gap-1">
                 <TextComponent elementType="small">{props.label}</TextComponent>
                 {props.tooltip && (
@@ -29,7 +36,7 @@ export function NodeField(props: Readonly<Props>): JSX.Element {
                 )}
             </div>
 
-            <div className="w-[200px]">
+            <div className={(props.small ?? false) ? 'w-[50px]' : 'w-[200px]'}>
                 {props.children}
                 <InputError error={props.error} />
             </div>
